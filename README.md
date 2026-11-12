@@ -137,6 +137,9 @@ python answer.py "2023 年经营活动现金流量净额是多少？同比增长
 |---|---|
 | `缺少环境变量：…` | `.env` 有没有复制、有没有填占位值、值后面有没有多余空格 |
 | 向量化 401 / 404 | 两把 key 有没有填反；`EMBED_BASE_URL` 是否漏了 `/v1` |
+| `Repository not found`（仓库明明建好了） | 多半是**私有仓库没带凭据**：GitHub 对未登录访问私有仓库也故意回这句；用 PAT 登录 GCM 后重试 |
+| `Authentication failed` | 密码栏要贴 PAT，不是 GitHub 账号密码；token 可能过期或没勾 `repo` 权限 |
+| `CONNECT tunnel failed, 502` | 当前网络代理到不了 GitHub，换网络或绕过代理再 push |
 | `请先运行 build_index.py` | 库还没建；`answer.py` 故意用 `get_collection` 明确报错，不悄悄建空库 |
 | 答案一直「资料中未提及」 | 先看 `【检索】命中 N 块`，再看 `chroma_db/` 是否为空集合 |
 | `集合 reports 现有 6 条` | 说明没走幂等重建（旧集合没删），重跑 `build_index.py` |
@@ -169,6 +172,12 @@ git remote add origin https://github.com/<你的用户名>/rag_study.git
 git branch -M main
 git push -u origin main
 ```
+
+> 🔑 **私有仓库要先登录**：第一次 push 会弹 Git Credential Manager 窗口，
+> 用户名填 GitHub 账号名，**密码栏粘贴 Personal Access Token（PAT）**——
+> GitHub 2021 年起已禁用账号密码，PAT 需勾选 `repo` 权限并授权到该仓库。
+> 登录成功后凭据会存进 Windows 凭据管理器，以后不必再填。
+> 若旧凭据失效，先到「Windows 凭据管理器 → Windows 凭据」删掉 `git:https://github.com` 再重试。
 
 > 🔐 **红线**：真 `.env` 绝不提交（含密钥）、`chroma_db/` 绝不提交（体积大、与机器相关）、
 > `.venv/` 绝不提交（几百 MB 且平台相关）。这三条已写进 `.gitignore`。
