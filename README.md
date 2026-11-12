@@ -191,4 +191,4 @@ git push -u origin main
 - [x] 能回答「这家公司现金流怎么样」这类问题，且只依据资料、不编造
 - [x] 答案后注明出处（文档 + 页码）
 - [x] 命令行可运行 + 完整 README
-- [ ] 上传 GitHub（本地 `git init` / `commit` 已完成，推送由仓库维护者执行上一节命令）
+- [x] 上传 GitHub（已推送到 https://github.com/cainiao345/rag_study ，本地 `main` 与远程同步于 `4cc9b93`）
