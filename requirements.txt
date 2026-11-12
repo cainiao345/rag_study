@@ -1,0 +1,19 @@
+# 研报问答库 · 依赖清单
+# 一键安装：pip install -r requirements.txt
+# 版本用 >= 只写下界，避免把用户锁死在某个旧版本上
+
+# 调用大模型（OpenAI 兼容协议）：DeepSeek 生成答案 + 硅基流动 embedding 都靠它
+openai>=1.0
+
+# 读取 .env 里的环境变量（load_dotenv）
+python-dotenv>=1.0
+
+# PDF 逐页抽文字：安装包名是 pymupdf；PyMuPDF 2.1 起代码里写 import pymupdf
+# （旧写法 import fitz 会触发 FutureWarning，第 9 课正式代码已统一改掉）
+pymupdf>=1.23
+
+# PDF 抠二维表格（extract_tables）
+pdfplumber>=0.11
+
+# 本地向量数据库（PersistentClient 持久化到 chroma_db/）
+chromadb>=0.5
