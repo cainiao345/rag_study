@@ -151,13 +151,15 @@ python answer.py "2023 年经营活动现金流量净额是多少？同比增长
 git init -b main
 
 # 只把该交的文件加入暂存区（显式列名，比 git add . 更容易自查）
+# Git Bash 用 \ 续行；PowerShell 请写成一整行（或用反引号 ` 续行），CMD 不支持 \
 git add .env.example .gitignore README.md requirements.txt \
         check_env.py build_index.py answer.py audit_index.py audit_hits.py \
         data/示例研报.txt
 
 # 提交前必查：确认 .env / chroma_db / .venv 都不在待提交列表里
 git status --short
-git check-ignore -v .env chroma_db .venv __pycache__
+git check-ignore -v .env chroma_db/ .venv/ __pycache__/
+#   目录名要带结尾的 /，才和 .gitignore 里的 `chroma_db/` 这类规则对得上
 
 # 提交到本地仓库（写清楚这次做了什么，别写 "update"）
 git commit -m "完成 S3 验收项目：研报问答库（RAG 全链路 + 答案溯源）"
